@@ -1,0 +1,2 @@
+# Configuration for https://pub.dev/packages/peanut
+extra-args: "--wasm --pwa-strategy none --base-href /paper_heatmap_logo/"
