@@ -1,0 +1,39 @@
+name: paper_heatmap_logo
+description: Paper Heatmap Logo
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_shaders: ^0.1.3
+  provider: ^6.1.2
+  vector_graphics: ^1.1.18
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  vector_graphics_compiler: ^1.1.16
+  very_good_analysis: ^7.0.0
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+          weight: 400
+
+  assets:
+    - assets/images/
+
+    - path: assets/images/svg/
+      transformers:
+        - package: vector_graphics_compiler
+
+  shaders:
+    - assets/shaders/heatmap.frag
