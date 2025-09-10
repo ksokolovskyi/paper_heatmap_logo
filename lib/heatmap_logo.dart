@@ -38,49 +38,52 @@ class _Logo extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 1,
         child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 500),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: ListenableBuilder(
-                listenable: Listenable.merge(controller.parameters),
-                builder: (context, child) {
-                  return ShaderBuilder(
-                    assetKey: 'assets/shaders/heatmap.frag',
-                    (context, shader, _) {
-                      return AnimatedSampler(
-                        (image, size, canvas) {
-                          shader
-                            ..setImageSampler(0, image)
-                            ..setFloatUniforms((uniforms) {
-                              uniforms
-                                // u_size
-                                ..setSize(size)
-                                // u_time
-                                ..setFloat(controller.time.value)
-                                // u_angle
-                                ..setFloat(controller.angle.value)
-                                // u_noise
-                                ..setFloat(controller.noise.value)
-                                // u_innerGlow
-                                ..setFloat(controller.innerGlow.value)
-                                // u_outerGlow
-                                ..setFloat(controller.outerGlow.value)
-                                // u_contour
-                                ..setFloat(controller.contour.value);
-                            });
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: ListenableBuilder(
+                  listenable: Listenable.merge(controller.parameters),
+                  builder: (context, child) {
+                    return ShaderBuilder(
+                      assetKey: 'assets/shaders/heatmap.frag',
+                      (context, shader, _) {
+                        return AnimatedSampler(
+                          (image, size, canvas) {
+                            shader
+                              ..setImageSampler(0, image)
+                              ..setFloatUniforms((uniforms) {
+                                uniforms
+                                  // u_size
+                                  ..setSize(size)
+                                  // u_time
+                                  ..setFloat(controller.time.value)
+                                  // u_angle
+                                  ..setFloat(controller.angle.value)
+                                  // u_noise
+                                  ..setFloat(controller.noise.value)
+                                  // u_innerGlow
+                                  ..setFloat(controller.innerGlow.value)
+                                  // u_outerGlow
+                                  ..setFloat(controller.outerGlow.value)
+                                  // u_contour
+                                  ..setFloat(controller.contour.value);
+                              });
 
-                          canvas.drawRect(
-                            Rect.fromLTWH(0, 0, size.width, size.height),
-                            Paint()..shader = shader,
-                          );
-                        },
-                        child: child!,
-                      );
-                    },
-                  );
-                },
-                child: const _Image(),
+                            canvas.drawRect(
+                              Rect.fromLTWH(0, 0, size.width, size.height),
+                              Paint()..shader = shader,
+                            );
+                          },
+                          child: child!,
+                        );
+                      },
+                    );
+                  },
+                  child: const _Image(),
+                ),
               ),
             ),
           ),
