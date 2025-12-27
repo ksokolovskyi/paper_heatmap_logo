@@ -80,12 +80,12 @@ class __ItemState extends State<_Item> with SingleTickerProviderStateMixin {
     duration: const Duration(milliseconds: 250),
   );
 
-  late final _logoOpacity = Tween<double>(
+  late final Animation<double> _logoOpacity = Tween<double>(
     begin: 0.4,
     end: 1,
   ).chain(CurveTween(curve: Curves.easeInOut)).animate(_controller);
 
-  late final _borderColor = ColorTween(
+  late final Animation<Color?> _borderColor = ColorTween(
     begin: const Color(0x00FFFFFF),
     end: const Color(0x66FFFFFF),
   ).chain(CurveTween(curve: Curves.easeInOut)).animate(_controller);

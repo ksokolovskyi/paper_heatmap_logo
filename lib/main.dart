@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paper_heatmap_logo/control_panel.dart';
 import 'package:paper_heatmap_logo/heatmap_logo.dart';
 import 'package:paper_heatmap_logo/heatmap_logo_state.dart';
 import 'package:paper_heatmap_logo/heatmap_shader_controller.dart';
@@ -53,18 +52,13 @@ class Screen extends StatefulWidget {
 }
 
 class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
-  final _logoKey = GlobalKey();
-  final _panelKey = GlobalKey();
+  final GlobalKey<State<StatefulWidget>> _logoKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final logo = KeyedSubtree(
       key: _logoKey,
       child: const HeatmapLogo(),
-    );
-    final panel = KeyedSubtree(
-      key: _panelKey,
-      child: const ControlPanel(),
     );
 
     return SingleChildScrollView(
@@ -79,10 +73,6 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(
-                  height: 72,
-                  width: double.infinity,
-                ),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(24),
@@ -90,13 +80,13 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
                         ? Row(
                             spacing: 32,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [logo, panel],
+                            children: [logo],
                           )
                         : Column(
                             spacing: 24,
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [logo, panel],
+                            children: [logo],
                           ),
                   ),
                 ),
